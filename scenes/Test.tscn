@@ -9,9 +9,3 @@ position = Vector2( 399, 194 )
 rotation = -18.9605
 tankBody = 1
 barrelType = 1
-
-[node name="Tank2" parent="." instance=ExtResource( 1 )]
-position = Vector2( 517, 122 )
-rotation = -6.1754
-tankBody = 4
-barrelType = 6

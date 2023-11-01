@@ -6,6 +6,8 @@ var speed = 200 # Quantos pixels por segundo
 #Criando os disparos dinamicamente
 var pre_bulllet = preload("res://scenes/Bullet.tscn")
 
+# Descobrir o nome de cada objeto na tela
+var groupName = "bullets-"+str(self)
 #lista de skins do tank 18/10 = 
 var bodies = [
 	"res://sprites/tankBody_bigRed.png",
@@ -48,7 +50,7 @@ export(int,
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	pass
+	print(groupName)
 	
 
 func _draw():
@@ -72,12 +74,13 @@ func _process(delta):
 	if Input.is_action_just_pressed("ui_shot"):
 		print("Bang!")
 		# Contando quantos tiros tem em um grupo
-		var counter = get_tree().get_nodes_in_group("cannon_bullets").size()
-		if counter < 6:
+		var counter = get_tree().get_nodes_in_group(groupName).size()
+		if counter < 8:
 			var bullet = pre_bulllet.instance()
 			bullet.global_position = $Barrel/Muzzle.global_position
 			#Aula do dia 18.10
 			bullet.dir = Vector2(cos(rotation), sin(rotation)).normalized()
+			bullet.add_to_group(groupName)
 			get_parent().add_child(bullet)
 			# 18.10
 			$Barrel/Animation.play("fire")
